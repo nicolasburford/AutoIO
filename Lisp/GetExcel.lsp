@@ -61,50 +61,50 @@
 ; (GetExcel "C:\\Temp\\Temp.xls" nil "XYZ123") = Open C:\Temp\Temp.xls on current sheet and read up to cell XYZ123
 ;-------------------------------------------------------------------------------
 (defun GetExcel (ExcelFile$ SheetName$ MaxRange$ / *ExcelData@ Column# ColumnRow@ Data@ ExcelRange^
-  ExcelValue ExcelValue ExcelVariant^ MaxColumn# MaxRow# Range$ Row# Worksheet)
+                 ExcelValue ExcelValue ExcelVariant^ MaxColumn# MaxRow# Range$ Row# Worksheet)
   (if (= (type ExcelFile$) 'STR)
     (if (not (findfile ExcelFile$))
       (progn
         (alert (strcat "Excel file " ExcelFile$ " not found."))
-        (exit)
-      );progn
-    );if
+        (exit)))
+      ;progn
+    ;if
     (progn
       (alert "Excel file not specified.")
-      (exit)
-    );progn
-  );if
+      (exit)))
+    ;progn
+  ;if
   (gc)
   (if (setq *ExcelApp% (vlax-get-object "Excel.Application"))
     (progn
       (alert "Close all Excel spreadsheets to continue!")
-      (vlax-release-object *ExcelApp%)(gc)
-    );progn
-  );if
+      (vlax-release-object *ExcelApp%)(gc)))
+    ;progn
+  ;if
   (setq ExcelFile$ (findfile ExcelFile$))
   (setq *ExcelApp% (vlax-get-or-create-object "Excel.Application"))
   (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Open ExcelFile$)
   (if SheetName$
     (vlax-for Worksheet (vlax-get-property *ExcelApp% "Sheets")
       (if (= (vlax-get-property Worksheet "Name") SheetName$)
-        (vlax-invoke-method Worksheet "Activate")
-      );if
-    );vlax-for
-  );if
+        (vlax-invoke-method Worksheet "Activate"))))
+      ;if
+    ;vlax-for
+  ;if
   (if MaxRange$
     (progn
       (setq ColumnRow@ (ColumnRow MaxRange$))
       (setq MaxColumn# (nth 0 ColumnRow@))
-      (setq MaxRow# (nth 1 ColumnRow@))
-    );progn
+      (setq MaxRow# (nth 1 ColumnRow@)))
+    ;progn
     (progn
       (setq CurRegion (vlax-get-property (vlax-get-property
-        (vlax-get-property *ExcelApp% "ActiveSheet") "Range" "A1") "CurrentRegion")
-      );setq
+                                          (vlax-get-property *ExcelApp% "ActiveSheet") "Range" "A1") "CurrentRegion"))
+      ;setq
       (setq MaxRow# (vlax-get-property (vlax-get-property CurRegion "Rows") "Count"))
-      (setq MaxColumn# (vlax-get-property (vlax-get-property CurRegion "Columns") "Count"))
-    );progn
-  );if
+      (setq MaxColumn# (vlax-get-property (vlax-get-property CurRegion "Columns") "Count"))))
+    ;progn
+  ;if
   (setq *ExcelData@ nil)
   (setq Row# 1)
   (repeat MaxRow#
@@ -120,21 +120,21 @@
           ((= (type ExcelValue) 'INT) (itoa ExcelValue))
           ((= (type ExcelValue) 'REAL) (rtosr ExcelValue))
           ((= (type ExcelValue) 'STR) (vl-string-trim " " ExcelValue))
-          ((/= (type ExcelValue) 'STR) "")
-        );cond
-      );setq
+          ((/= (type ExcelValue) 'STR) "")))
+        ;cond
+      ;setq
       (setq Data@ (append Data@ (list ExcelValue)))
-      (setq Column# (1+ Column#))
-    );repeat
+      (setq Column# (1+ Column#)))
+    ;repeat
     (setq *ExcelData@ (append *ExcelData@ (list Data@)))
-    (setq Row# (1+ Row#))
-  );repeat
+    (setq Row# (1+ Row#)))
+  ;repeat
   (vlax-invoke-method (vlax-get-property *ExcelApp% "ActiveWorkbook") 'Close :vlax-False)
   (vlax-invoke-method *ExcelApp% 'Quit)
   (vlax-release-object *ExcelApp%)(gc)
   (setq *ExcelApp% nil)
-  *ExcelData@
-);defun GetExcel
+  *ExcelData@)
+;defun GetExcel
 ;-------------------------------------------------------------------------------
 ; GetCell - Returns the cell value from the *ExcelData@ list
 ; Arguments: 1
@@ -148,11 +148,11 @@
   (setq Return "")
   (if *ExcelData@
     (if (and (>= (length *ExcelData@) Row#)(>= (length (nth 0 *ExcelData@)) Column#))
-      (setq Return (nth Column# (nth Row# *ExcelData@)))
-    );if
-  );if
-  Return
-);defun GetCell
+      (setq Return (nth Column# (nth Row# *ExcelData@)))))
+    ;if
+  ;if
+  Return)
+;defun GetCell
 ;-------------------------------------------------------------------------------
 ; OpenExcel - Opens an Excel spreadsheet
 ; Arguments: 3
@@ -170,46 +170,46 @@
       (setq *ExcelFile$ ExcelFile$)
       (progn
         (alert (strcat "Excel file " ExcelFile$ " not found."))
-        (exit)
-      );progn
-    );if
-    (setq *ExcelFile$ "")
-  );if
+        (exit)))
+      ;progn
+    ;if
+    (setq *ExcelFile$ ""))
+  ;if
   (gc)
   (if (setq *ExcelApp% (vlax-get-object "Excel.Application"))
     (progn
       (alert "Close all Excel spreadsheets to continue!")
-      (vlax-release-object *ExcelApp%)(gc)
-    );progn
-  );if
+      (vlax-release-object *ExcelApp%)(gc)))
+    ;progn
+  ;if
   (setq *ExcelApp% (vlax-get-or-create-object "Excel.Application"))
   (if ExcelFile$
     (if (findfile ExcelFile$)
       (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Open ExcelFile$)
-      (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Add)
-    );if
-    (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Add)
-  );if
+      (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Add))
+    ;if
+    (vlax-invoke-method (vlax-get-property *ExcelApp% 'WorkBooks) 'Add))
+  ;if
   (if Visible
-    (vla-put-visible *ExcelApp% :vlax-true)
-  );if
+    (vla-put-visible *ExcelApp% :vlax-true))
+  ;if
   (if (= (type SheetName$) 'STR)
     (progn
       (vlax-for Sheet$ (vlax-get-property *ExcelApp% "Sheets")
-        (setq Sheets@ (append Sheets@ (list (vlax-get-property Sheet$ "Name"))))
-      );vlax-for
+        (setq Sheets@ (append Sheets@ (list (vlax-get-property Sheet$ "Name")))))
+      ;vlax-for
       (if (member SheetName$ Sheets@)
         (vlax-for Worksheet (vlax-get-property *ExcelApp% "Sheets")
           (if (= (vlax-get-property Worksheet "Name") SheetName$)
-            (vlax-invoke-method Worksheet "Activate")
-          );if
-        );vlax-for
-        (vlax-put-property (vlax-invoke-method (vlax-get-property *ExcelApp% "Sheets") "Add") "Name" SheetName$)
-      );if
-    );progn
-  );if
-  (princ)
-);defun OpenExcel
+            (vlax-invoke-method Worksheet "Activate")))
+          ;if
+        ;vlax-for
+        (vlax-put-property (vlax-invoke-method (vlax-get-property *ExcelApp% "Sheets") "Add") "Name" SheetName$))))
+      ;if
+    ;progn
+  ;if
+  (princ))
+;defun OpenExcel
 ;-------------------------------------------------------------------------------
 ; PutCell - Put values into Excel cells
 ; Arguments: 2
@@ -221,32 +221,32 @@
 ;-------------------------------------------------------------------------------
 (defun PutCell (StartCell$ Data@ / Cell$ Column# ExcelRange Row#)
   (if (= (type Data@) 'STR)
-    (setq Data@ (list Data@))
-  )
+    (setq Data@ (list Data@)))
+
   (setq ExcelRange (vlax-get-property *ExcelApp% "Cells"))
   (if (Cell-p StartCell$)
     (setq Column# (car (ColumnRow StartCell$))
-          Row# (cadr (ColumnRow StartCell$))
-    );setq
+          Row# (cadr (ColumnRow StartCell$)))
+    ;setq
     (if (vl-catch-all-error-p
           (setq Cell$ (vl-catch-all-apply 'vlax-get-property
-            (list (vlax-get-property *ExcelApp% "ActiveSheet") "Range" StartCell$))
-          );setq
-        );vl-catch-all-error-p
+                       (list (vlax-get-property *ExcelApp% "ActiveSheet") "Range" StartCell$))))
+          ;setq
+        ;vl-catch-all-error-p
         (alert (strcat "The cell ID \"" StartCell$ "\" is invalid."))
         (setq Column# (vlax-get-property Cell$ "Column")
-              Row# (vlax-get-property Cell$ "Row")
-        );setq
-    );if
-  );if
+              Row# (vlax-get-property Cell$ "Row"))))
+        ;setq
+    ;if
+  ;if
   (if (and Column# Row#)
     (foreach Item Data@
       (vlax-put-property ExcelRange "Item" Row# Column# (vl-princ-to-string Item))
-      (setq Column# (1+ Column#))
-    );foreach
-  );if
-  (princ)
-);defun PutCell
+      (setq Column# (1+ Column#))))
+    ;foreach
+  ;if
+  (princ))
+;defun PutCell
 ;-------------------------------------------------------------------------------
 ; CloseExcel - Closes Excel spreadsheet
 ; Arguments: 1
@@ -260,28 +260,28 @@
     (if (= (strcase ExcelFile$) (strcase *ExcelFile$))
       (if (findfile ExcelFile$)
         (vlax-invoke-method (vlax-get-property *ExcelApp% "ActiveWorkbook") "Save")
-        (setq Saveas t)
-      );if
+        (setq Saveas t))
+      ;if
       (if (findfile ExcelFile$)
         (progn
           (vl-file-delete (findfile ExcelFile$))
-          (setq Saveas t)
-        );progn
-        (setq Saveas t)
-      );if
-    );if
-  );if
+          (setq Saveas t))
+        ;progn
+        (setq Saveas t))))
+      ;if
+    ;if
+  ;if
   (if Saveas
     (vlax-invoke-method (vlax-get-property *ExcelApp% "ActiveWorkbook")
-      "SaveAs" ExcelFile$ -4143 "" "" :vlax-false :vlax-false nil
-    );vlax-invoke-method
-  );if
+      "SaveAs" ExcelFile$ -4143 "" "" :vlax-false :vlax-false nil))
+    ;vlax-invoke-method
+  ;if
   (vlax-invoke-method (vlax-get-property *ExcelApp% "ActiveWorkbook") 'Close :vlax-False)
   (vlax-invoke-method *ExcelApp% 'Quit)
   (vlax-release-object *ExcelApp%)(gc)
   (setq *ExcelApp% nil *ExcelFile$ nil)
-  (princ)
-);defun CloseExcel
+  (princ))
+;defun CloseExcel
 ;-------------------------------------------------------------------------------
 ; ColumnRow - Returns a list of the Column and Row number
 ; Function By: Gilles Chanteau from Marseille, France
@@ -293,14 +293,14 @@
   (setq Column$ "")
   (while (< 64 (ascii (setq Char$ (strcase (substr Cell$ 1 1)))) 91)
     (setq Column$ (strcat Column$ Char$)
-          Cell$ (substr Cell$ 2)
-    );setq
-  );while
+          Cell$ (substr Cell$ 2)))
+    ;setq
+  ;while
   (if (and (/= Column$ "") (numberp (setq Row# (read Cell$))))
     (list (Alpha2Number Column$) Row#)
-    '(1 1);default to "A1" if there's a problem
-  );if
-);defun ColumnRow
+    '(1 1)));default to "A1" if there's a problem
+  ;if
+;defun ColumnRow
 ;-------------------------------------------------------------------------------
 ; Alpha2Number - Converts Alpha string into Number
 ; Function By: Gilles Chanteau from Marseille, France
@@ -312,10 +312,10 @@
   (if (= 0 (setq Num# (strlen Str$)))
     0
     (+ (* (- (ascii (strcase (substr Str$ 1 1))) 64) (expt 26 (1- Num#)))
-       (Alpha2Number (substr Str$ 2))
-    );+
-  );if
-);defun Alpha2Number
+       (Alpha2Number (substr Str$ 2)))))
+    ;+
+  ;if
+;defun Alpha2Number
 ;-------------------------------------------------------------------------------
 ; Number2Alpha - Converts Number into Alpha string
 ; Function By: Gilles Chanteau from Marseille, France
@@ -328,10 +328,10 @@
     (chr (+ 64 Num#))
     (if (= 0 (setq Val# (rem Num# 26)))
       (strcat (Number2Alpha (1- (/ Num# 26))) "Z")
-      (strcat (Number2Alpha (/ Num# 26)) (chr (+ 64 Val#)))
-    );if
-  );if
-);defun Number2Alpha
+      (strcat (Number2Alpha (/ Num# 26)) (chr (+ 64 Val#))))))
+    ;if
+  ;if
+;defun Number2Alpha
 ;-------------------------------------------------------------------------------
 ; Cell-p - Evaluates if the argument Cell$ is a valid cell ID
 ; Function By: Gilles Chanteau from Marseille, France
@@ -342,10 +342,10 @@
 (defun Cell-p (Cell$)
   (and (= (type Cell$) 'STR)
     (or (= (strcase Cell$) "A1")
-      (not (equal (ColumnRow Cell$) '(1 1)))
-    );or
-  );and
-);defun Cell-p
+      (not (equal (ColumnRow Cell$) '(1 1))))))
+    ;or
+  ;and
+;defun Cell-p
 ;-------------------------------------------------------------------------------
 ; Row+n - Returns the cell ID located a number of rows from cell
 ; Function By: Gilles Chanteau from Marseille, France
@@ -356,8 +356,8 @@
 ;-------------------------------------------------------------------------------
 (defun Row+n (Cell$ Num#)
   (setq Cell$ (ColumnRow Cell$))
-  (strcat (Number2Alpha (car Cell$)) (itoa (max 1 (+ (cadr Cell$) Num#))))
-);defun Row+n
+  (strcat (Number2Alpha (car Cell$)) (itoa (max 1 (+ (cadr Cell$) Num#)))))
+;defun Row+n
 ;-------------------------------------------------------------------------------
 ; Column+n - Returns the cell ID located a number of columns from cell
 ; Function By: Gilles Chanteau from Marseille, France
@@ -368,8 +368,8 @@
 ;-------------------------------------------------------------------------------
 (defun Column+n (Cell$ Num#)
   (setq Cell$ (ColumnRow Cell$))
-  (strcat (Number2Alpha (max 1 (+ (car Cell$) Num#))) (itoa (cadr Cell$)))
-);defun Column+n
+  (strcat (Number2Alpha (max 1 (+ (car Cell$) Num#))) (itoa (cadr Cell$))))
+;defun Column+n
 ;-------------------------------------------------------------------------------
 ; rtosr - Used to change a real number into a short real number string
 ; stripping off all trailing 0's.
@@ -382,7 +382,7 @@
   (setvar "DIMZIN" 8)
   (setq ShortReal$ (rtos RealNum~ 2 8))
   (setvar "DIMZIN" DimZin#)
-  ShortReal$
-);defun rtosr
+  ShortReal$)
+;defun rtosr
 ;-------------------------------------------------------------------------------
 (princ);End of GetExcel.lsp

@@ -3,12 +3,12 @@
 
   (setq data (getexceldata (findfile file) (strcat "Interconnect - Electrical")))
   (setq cnt (length data))
-  
+
   ;if layout doesnt exist add it
   (if (member "10" (layoutlist))
     (setq pname "10")
-    (addlayout "Main" 10)
-  )
+    (addlayout "Main" 10))
+
 
   (setq i 2)
   (setq pgcnt 0)
@@ -21,33 +21,33 @@
       (setq index (getattributevalue blockRef "INDEX"))
       ;find the block with the right index and set all values
       (if (= index (rtos (- (- i 1) (* pgcnt 34)) 2 0))
-	(progn
-	  (setattributevalue blockRef "LOCATION" (getdata data i 1))
-	  (setattributevalue blockRef "NAME1" (getdata data i 0))
-	  (setattributevalue blockRef "REFERENCE_DRAWING" (strcat "REF DWG " (getdata data i 2)))
-	  (setattributevalue blockRef "1_CABLE_TYPE" (getdata data i 3))
-	  (setattributevalue blockRef "1_SUPPLIED_BY" (getdata data i 4))
-	  (setattributevalue blockRef "2_CABLE_TYPE" (getdata data i 5))
-	  (setattributevalue blockRef "2_SUPPLIED_BY" (getdata data i 6))
-	  (setattributevalue blockRef "3_CABLE_TYPE" (getdata data i 7))
-	  (setattributevalue blockRef "3_SUPPLIED_BY" (getdata data i 8))
-	)
-      )
-      (setq k (+ k 1))
-    )
+       (progn
+         (setattributevalue blockRef "LOCATION" (getdata data i 1))
+         (setattributevalue blockRef "NAME1" (getdata data i 0))
+         (setattributevalue blockRef "REFERENCE_DRAWING" (strcat "REF DWG " (getdata data i 2)))
+         (setattributevalue blockRef "1_CABLE_TYPE" (getdata data i 3))
+         (setattributevalue blockRef "1_SUPPLIED_BY" (getdata data i 4))
+         (setattributevalue blockRef "2_CABLE_TYPE" (getdata data i 5))
+         (setattributevalue blockRef "2_SUPPLIED_BY" (getdata data i 6))
+         (setattributevalue blockRef "3_CABLE_TYPE" (getdata data i 7))
+         (setattributevalue blockRef "3_SUPPLIED_BY" (getdata data i 8))))
+
+
+      (setq k (+ k 1)))
+
     (setq i (+ i 1))
     (if (and (> (- i 1) (* (+ 1 pgcnt) 34))(< i cnt))
       (progn
-	(setq pgcnt (+ pgcnt 1))
-	(if (member (rtos (+ 10 pgcnt) 2 0) (layoutlist))
-	  (setq pname (rtos (+ 10 pgcnt) 2 0))
-	  (addlayout "Main" (+ 10 pgcnt))
-	)
-	(setq ss (ssget "X" (list (cons 410 pname) (cons 2 "BLOCK WIRING LABEL3"))))
-      )
-    )
-  )
-)
+       (setq pgcnt (+ pgcnt 1))
+       (if (member (rtos (+ 10 pgcnt) 2 0) (layoutlist))
+         (setq pname (rtos (+ 10 pgcnt) 2 0))
+         (addlayout "Main" (+ 10 pgcnt)))
+
+       (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "BLOCK WIRING LABEL3"))))))))
+
+
+
+
 
 (defun deltxt ()
 
@@ -64,6 +64,4 @@
     (setattributevalue blockRef "2_SUPPLIED_BY" "-")
     (setattributevalue blockRef "3_CABLE_TYPE" "-")
     (setattributevalue blockRef "3_SUPPLIED_BY" "-")
-    (setq i (+ i 1))
-  )
-)
+    (setq i (+ i 1))))
