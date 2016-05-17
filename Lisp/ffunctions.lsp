@@ -19,8 +19,6 @@
 
     (alert (strcat slot " block not found.")))
 
-
-
   ;;inserting each component
   (foreach slot  slots
     (if  (> i 1)

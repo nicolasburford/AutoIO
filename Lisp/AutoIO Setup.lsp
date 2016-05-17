@@ -12,11 +12,8 @@
        "\\\\usnr.com\\data\\Eng\\Electrical\\New Electrical Design\\Electrical\\AutoIO Tools\\Source Code\\VB\\Test Form For Hex.dll"
        "C:\\Drafting\\Custom\\AutoIO\\VB")))
 
-
-
   (c:AutoIO)
   (princ))
-
 
 ;Main update function called form AutoCAD
 (defun c:autoioupdate ()
