@@ -1,0 +1,20 @@
+;;This file contains the commands to load components on startup.
+
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\functions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\main.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\Srxtext.vlx")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\GetExcel.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\pfunctions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\ffunctions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\cfunctions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\clfunctions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\nfunctions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\dialogboxes.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\plc5functions.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\AutoIO Setup.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\references.lsp")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\interconnect.lsp")
+(command "netload" "C:\\Drafting\\Custom\\AutoIO\\VB\\ACADEXCEL.dll")
+(command "netload" "C:\\Drafting\\Custom\\AutoIO\\VB\\Test Form For Hex.dll")
+
+(princ "\nAutoIO loaded successfully.\n")
