@@ -35,7 +35,13 @@
         (nsmain))
 
        ((= SIZ 6)        ;Interconnect
-        (intcntmain)))
+        (intcntmain))
+
+        ((= SIZ 7)        ;Interconnect
+         (newpointmain)))
+
+
+
 
 
       (setvar 'osmode snapstate)
@@ -87,6 +93,13 @@
  (if (= rackdrop 1)
    (pplace slots)))
 
+(defun newpointmain ()
+  (setq tfile "")
+  (newpinputs)
+  (if (= rackdrop 1)
+    (newpplace slots)
+  )
+)
 
 (defun plc5main ()
   (setq tfile "1771_PLC5_AutoIO_Template.dwg") ;TEMPLATE FILE LOCATION

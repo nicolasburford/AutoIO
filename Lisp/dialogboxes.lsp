@@ -6,7 +6,7 @@
    (exit))
      ;if
 
- (setq cnames '("ControlLogix" "Flex" "Point" "Compact" "PLC5" "Network Switch" "Interconnect"));dropdown list
+ (setq cnames '("ControlLogix" "Flex" "Point" "Compact" "PLC5" "Network Switch" "Interconnect" "New Point"));dropdown list
 
 ;initial variable conditions
  (if (setq ss (ssget "X" (list (cons 410 "09")(cons 2 "drawinginfo"))))
