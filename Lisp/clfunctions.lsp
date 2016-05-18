@@ -24,7 +24,7 @@
       (progn
        (setq slot (getdata data i 0))
        (setq slots (append slots (list slot)))
-
+       (setq slotnum (formatnum (- k 1)))
        (if (AND (> k 1)(/= slot "EMPTY")(/= slot "1756-N2"))
         (progn
           (if (< i (- cnt 1))
@@ -38,10 +38,11 @@
                   (progn
                     (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
                       (setq pname (rtos (+ k 8) 2 0))
-                      (addlayout slot (+ k 8))))
+
+                      (addlayout slot (+ k 8) slotnum)))
 
 
-                  (addlayout slot (+ k 8)))
+                  (addlayout slot (+ k 8) slotnum))
 
         ;update io
                  (setq iocnt 0)
@@ -53,10 +54,10 @@
                   (progn
                     (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
                       (setq pname (rtos (+ k 8) 2 0))
-                      (addlayout slot (+ k 8))))
+                      (addlayout slot (+ k 8) slotnum)))
 
 
-                  (addlayout slot (+ k 8))))))
+                  (addlayout slot (+ k 8) slotnum)))))
 
 
 
@@ -66,10 +67,10 @@
                (progn
                  (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
                    (setq pname (rtos (+ k 8) 2 0))
-                   (addlayout slot (+ k 8))))
+                   (addlayout slot (+ k 8) slotnum)))
 
 
-               (addlayout slot (+ k 8)))))))
+               (addlayout slot (+ k 8) slotnum))))))
 
 
 
