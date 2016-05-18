@@ -256,7 +256,7 @@
 
 
 ;add a sheet from templates
-(defun addlayout (modname num)
+(defun addlayout (modname num slotnum)
 
   (command "-layout" "template" tfile modname "") ;will continue even if slot not found
 
@@ -305,7 +305,7 @@
 
 
      (setq obj (ssget "X" (list (cons 410 pname)))) ;everything in layout
-     (srxTEXT "Substring" "ZZ" (formatnum (- num 10)) obj))
+     (srxTEXT "Substring" "ZZ" slotnum obj))
 
    (alert (strcat "\"" modname "\"" " Module not found in template."))))
 
