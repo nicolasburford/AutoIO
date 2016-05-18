@@ -24,7 +24,7 @@
       (progn
        (setq slot (getdata data i 0))
        (setq slots (append slots (list slot)))
-       (setq slotnum (formatnum (- k 1)))
+       (setq slotnum (formatnum (- k 2)))
        (if (AND (> k 1)(/= slot "EMPTY")(/= slot "1756-N2"))
         (progn
           (if (< i (- cnt 1))
