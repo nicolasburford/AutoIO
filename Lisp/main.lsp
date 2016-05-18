@@ -94,7 +94,7 @@
    (pplace slots)))
 
 (defun newpointmain ()
-  (setq tfile "")
+  (setq tfile "1734 New_Point AutoIO Template.dwg")
   (newpinputs)
   (if (= rackdrop 1)
     (newpplace slots)
