@@ -86,7 +86,35 @@
 
         (vlax-invoke blk 'getattributes)))
 
-
+(defun getwidth ( ss / ent obj HeadHeight Height Width)
+  ;(setq ss (ssget))
+  (setq en (tblobjname "block" (cdr (assoc 2 (entget ss)))))
+  (setq point (cdr (assoc 10 (entget en))))
+  (setq min (nth 0 point))
+  (setq max (nth 0 point))
+  (while en
+    (setq point1 (cdr (assoc 10 (entget en))))
+    (setq point2 (cdr (assoc 11 (entget en))))
+    (if (/= point1 nil)
+      (progn
+        (if (< (nth 0 point1) min)
+            (setq min (nth 0 point1)))
+        (if (> (nth 0 point1) max)
+            (setq max (nth 0 point1)))
+      )
+    )
+    (if (/= point2 nil)
+      (progn
+        (if (< (nth 0 point2) min)
+            (setq min (nth 0 point2)))
+        (if (> (nth 0 point2) max)
+            (setq max (nth 0 point2)))
+      )
+    )
+    (setq en (entnext en))
+  )
+  (- max min)
+)
 
 ;; Get Attributes  -  Lee Mac
 ;; Returns an association list of attributes present in the supplied block.
