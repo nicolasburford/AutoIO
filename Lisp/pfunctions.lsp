@@ -114,10 +114,10 @@
                           (progn
                             (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") "SINPUTS")
                              (setq pname (rtos pageint 2 0))
-                             (addlayout "SINPUTS" pageint)))
+                             (addlayout "SINPUTS" pageint "00")))
 
 
-                          (addlayout "SINPUTS" pageint))
+                          (addlayout "SINPUTS" pageint "00"))
 
                         (setq iocnt 0)))
 
@@ -135,10 +135,10 @@
                           (progn
                             (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") "INPUTS")
                              (setq pname (rtos pageint 2 0))
-                             (addlayout "INPUTS" pageint)))
+                             (addlayout "INPUTS" pageint "00")))
 
 
-                          (addlayout "INPUTS" pageint))
+                          (addlayout "INPUTS" pageint "00"))
 
                         (setq obj (ssget "X" (list (cons 410 pagenum))))
                         (if (= (substr conso 3 1) "C")
@@ -166,10 +166,10 @@
                           (progn
                             (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") "SOUTPUTS")
                              (setq pname (rtos pageint 2 0))
-                             (addlayout "SOUTPUTS" pageint)))
+                             (addlayout "SOUTPUTS" pageint "00")))
 
 
-                          (addlayout "SOUTPUTS" pageint))
+                          (addlayout "SOUTPUTS" pageint "00"))
 
                         (setq iocnt 0)))
 
@@ -187,10 +187,10 @@
                           (progn
                             (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") "OUTPUTS")
                              (setq pname (rtos pageint 2 0))
-                             (addlayout "OUTPUTS" pageint)))
+                             (addlayout "OUTPUTS" pageint "00")))
 
 
-                          (addlayout "OUTPUTS" pageint))
+                          (addlayout "OUTPUTS" pageint "00"))
 
                         (setq obj (ssget "X" (list (cons 410 pagenum))))
                         (if (= (substr conso 3 1) "C")

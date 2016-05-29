@@ -6,7 +6,7 @@
   (setq data (getexcel file "Network Switch" (strcat "G" (rtos (+ (* 35 enclnum) 4) 2 0))))
 
   (setvar 'osmode 0) ;disables osnap
-  
+
   (setq corn '(27.8125 3.9975)) ;corner of usnr block used as insertion point
   (setq i 0)
 
@@ -22,9 +22,9 @@
     (if (= (getdata data k 0) "Ethernet Port")
       (progn
 	(setq p (+ p 10))
+  (setq slotnum (formatnum (+ p 10)))
+	(addlayout "01a" p slotnum)
 
-	(addlayout "01a" p)
-	
 	(setq k (+ k 1))
 	(setq i 1)
 	(setq to1 '(0.326658 20.787)) ;insertion points for icons
@@ -42,7 +42,7 @@
 	      (setattributevalue blockRef "MODULE_NAME" (getdata data k 3))
 	      (setattributevalue blockRef "REFDWG" (getdata data k 4))
 	      (setattributevalue blockRef "IPADDRESS" (getdata data k 5))
- 
+
 	    ;inserting icons
 	      (if (OR (< i 5)(> i 22)) ;middle two rows
 		(progn

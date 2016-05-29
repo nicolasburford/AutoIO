@@ -37,6 +37,7 @@
       ;replace with updated template version. if not leave untouched
        (if (AND (> k 1)(/= slot "EMPTY"))
         (progn
+          (setq slotnum (formatnum (- k 2)))
           (if (AND (/= (substr (getdata data (+ i 1) 0) 1 4) cnum)(/= (getdata data (+ i 1) 0) "EMPTY")(/= (getdata data (+ i 1) 0) "ControlLogix.0")(not (vl-string-search "Analog" (getdata data i 1)))) ;if it has inputs
             (progn
               (if (ssget "X" (list (cons 410 (rtos (+ k 8) 2 0))));if block exists in correct layout
@@ -44,13 +45,13 @@
                  (setq pname (rtos (+ k 8) 2 0))
                  (delsymb pname)) ;delete that layouts symbols
 
-               (addlayout slot (+ k 8)))
+               (addlayout slot (+ k 8) slotnum))
 
               (plinputsh))
 
             (progn
               (if (not (OR (ssget "X" (list (cons 2 slot)(cons 410 (rtos (+ k 8) 2 0))))(ssget "X" (list (cons 2 (strcat slot "a"))(cons 410 (rtos (+ k 8) 2 0))))))
-               (addlayout slot (+ k 8)))))))
+               (addlayout slot (+ k 8) slotnum))))))
 
 
 

@@ -9,8 +9,6 @@
       (alert (strcat "Sheet " conso " IO not found."))
      (setq cnt 0)))
 
-
-
   (setq slots '())
 
   (setq i 0)

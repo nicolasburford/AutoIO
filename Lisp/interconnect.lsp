@@ -7,7 +7,7 @@
   ;if layout doesnt exist add it
   (if (member "10" (layoutlist))
     (setq pname "10")
-    (addlayout "Main" 10))
+    (addlayout "Main" 10 "00"))
 
 
   (setq i 2)
@@ -41,7 +41,8 @@
        (setq pgcnt (+ pgcnt 1))
        (if (member (rtos (+ 10 pgcnt) 2 0) (layoutlist))
          (setq pname (rtos (+ 10 pgcnt) 2 0))
-         (addlayout "Main" (+ 10 pgcnt)))
+         (setq slotnum (formatnum (+ 10 pgcnt)))
+         (addlayout "Main" (+ 10 pgcnt) slotnum))
 
        (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "BLOCK WIRING LABEL3"))))))))
 

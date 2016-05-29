@@ -107,16 +107,17 @@
       ;replace with updated template version. if not leave untouched
        (if (AND (> k 1)(/= slot "EMPTY"))
         (progn
+          (setq slotnum (formatnum (- k 2)))
           (if (AND (/= (substr (getdata data (+ i 1) 0) 1 4) cnum)(/= (getdata data (+ i 1) 0) "")(/= (getdata data (+ i 1) 0) "EMPTY")(/= (getdata data (+ i 1) 0) "ControlLogix.0")(not (vl-string-search "Analog" (getdata data i 1)))) ;if it has inputs
             (progn
               (if (setq ss (ssget "X" (list (cons 410 (rtos (+ k 8) 2 0))(cons 2 "MODNAME"))))
                (progn
                  (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
                    (setq pname (rtos (+ k 8) 2 0))
-                   (addlayout slot (+ k 8))))
+                   (addlayout slot (+ k 8) slotnum)))
 
 
-               (addlayout slot (+ k 8)))
+               (addlayout slot (+ k 8) slotnum))
 
               (setq iocnt 0)
               (inputsh))
@@ -126,10 +127,10 @@
                (progn
                  (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
                    (setq pname (rtos (+ k 8) 2 0))
-                   (addlayout slot (+ k 8))))
+                   (addlayout slot (+ k 8) slotnum)))
 
 
-               (addlayout slot (+ k 8)))))))
+               (addlayout slot (+ k 8) slotnum))))))
 
 
 

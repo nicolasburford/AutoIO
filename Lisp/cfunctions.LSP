@@ -78,7 +78,7 @@
       (setq cnt 0)
     )
   )
-  
+
   (setq slots '())
 
   (setq i 0)
@@ -102,6 +102,7 @@
       (if (AND (> k 1)(/= slot "EMPTY"))
 	(progn
 	  ;If slot has inputs
+    (setq slotnum (formatnum (- k 2)))
 	  (if (AND (/= (substr (getdata data (+ i 1) 0) 1 4) cnum)(/= (getdata data (+ i 1) 0) "")(/= (getdata data (+ i 1) 0) "EMPTY")(/= (getdata data (+ i 1) 0) "ControlLogix.0")(not (vl-string-search "Analog" (getdata data i 1)))) ;if it has inputs
 	    (progn
 	      ;If a sheet exists on given page. If its the same module keep it if its different
@@ -110,10 +111,10 @@
 		(progn
 		  (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
 		    (setq pname (rtos (+ k 8) 2 0))
-		    (addlayout slot (+ k 8))
+		    (addlayout slot (+ k 8) slotnum)
 		  )
 		)
-		(addlayout slot (+ k 8))
+		(addlayout slot (+ k 8) slotnum)
 	      )
 	      ;Update IO
 	      (setq iocnt 0)
@@ -125,10 +126,10 @@
 		(progn
 		  (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
 		    (setq pname (rtos (+ k 8) 2 0))
-		    (addlayout slot (+ k 8))
+		    (addlayout slot (+ k 8) slotnum)
 		  )
 		)
-		(addlayout slot (+ k 8))
+		(addlayout slot (+ k 8) slotnum)
 	      )
 	    )
 	  )
