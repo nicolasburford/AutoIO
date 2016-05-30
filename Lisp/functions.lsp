@@ -319,7 +319,7 @@
         (setq ss (ssget "X" (list (cons 2 "BorderArchD")(cons 410 pname))))
         (setq blockRef (vlax-ename->vla-object (ssname ss 0)))
         (setq ss (ssget "_X" (list (cons 2 "Preliminary")(cons 410 pname))))
-        (setq blockRefs (vlax-ename->vla-object (ssname ss 0)))
+        ;(setq blockRefs (vlax-ename->vla-object (ssname ss 0)))
 
     ;Getting info from sheet 9
         (setq desctag (getattributevalue blockRef9 "DWG_DESCRIPTION"))
@@ -336,7 +336,8 @@
         (setattributevalue blockRef "CLIENT_LOCATION" locatag)
         (setattributevalue blockRef "DRAFTER" draftag)
         (setattributevalue blockRef "DATE" (today))
-        (setattributevalue blockRefs "DATE/TIME" (today))))
+        ;(setattributevalue blockRefs "DATE/TIME" (today))
+        ))
 
 
      (setq obj (ssget "X" (list (cons 410 pname)))) ;everything in layout

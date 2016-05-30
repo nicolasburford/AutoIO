@@ -41,8 +41,10 @@
        (setq pgcnt (+ pgcnt 1))
        (if (member (rtos (+ 10 pgcnt) 2 0) (layoutlist))
          (setq pname (rtos (+ 10 pgcnt) 2 0))
-         (setq slotnum (formatnum (+ 10 pgcnt)))
-         (addlayout "Main" (+ 10 pgcnt) slotnum))
+         (progn
+           (setq slotnum (formatnum (+ 10 pgcnt)))
+           (addlayout "Main" (+ 10 pgcnt) slotnum))
+         )
 
        (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "BLOCK WIRING LABEL3"))))))))
 
