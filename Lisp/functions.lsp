@@ -35,26 +35,33 @@
 
 
 ;this function will change all of most occuring stamps
-(defun c:addstamp ()
+(defun C:addstamp ()
   (selectstamp)
   (setq topt '(31.75 6.5625))
-  (setq popstamp (currentstamps))
   (if (= userclick T)
-    (progn
-
-     (foreach layout (layoutlist)
-       (if (not (ssget "X" (list (cons 2 (nth 0 popstamp))(cons 410 layout))))
-         (insblock layout topt (strcat (nth 0 popstamp) ".dwg"))))
-
-
-     (command "._insert" (strcat (nth 0 popstamp) "=" stamp) (list "" ""))
-     (setq i 0)
-     (setq ss (ssget "_X" (list (cons 0 "INSERT") (cons 2 (nth 0 popstamp)) (cons 66 1))))
-     (repeat (sslength ss)
-      (setq blockRef (vlax-ename->vla-object (ssname ss i)))
-      (setattributevalue blockRef "DATE/TIME" (today))
-      (setq i (+ i 1))))))
-
+    (foreach layout (layoutlist)
+      (setq i 0 pt nil)
+      (setq ss (ssget "_X" (list (cons 0 "INSERT") (cons 66 1) (cons 410 layout))))
+      (repeat (sslength ss)
+        (setq valobj (vlax-ename->vla-object (ssname ss i)))
+        (setq attlist (getattributes valobj))
+        (setq upatt (cdr (assoc "DATE/TIME" attlist)))
+        (if (AND (/= upatt nil) (= (length attlist) 1))
+          (progn
+            (setq pt (cdr (assoc 10 (entget (ssname ss i)))))
+            (vla-delete valobj)
+          )
+        )
+        (setq i (+ i 1))
+      )
+      (if (= pt nil)
+        (insblock layout topt (strcat stamp ".dwg"))
+        (insblock layout pt (strcat stamp ".dwg"))
+      )
+      (setattributevalue iblk "DATE/TIME" (today))
+    )
+  )
+)
 
 
 
