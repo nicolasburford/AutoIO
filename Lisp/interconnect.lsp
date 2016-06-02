@@ -43,7 +43,7 @@
          (setq pname (rtos (+ 10 pgcnt) 2 0))
          (progn
            (setq slotnum (formatnum (+ 10 pgcnt)))
-           (addlayout "Main" (+ 10 pgcnt) slotnum))
+           (addlayout "Main" (+ 10 pgcnt) "00"))
          )
 
        (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "BLOCK WIRING LABEL3"))))))))

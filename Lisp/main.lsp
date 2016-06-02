@@ -124,11 +124,11 @@
 
 ;Main function for populating Network template.
 (defun nsmain (/ to1 to2 to3 to4 corn obj)
-  (setq tfile "Network_AutoIO_Template.dwg") ;TEMPLATE FILE LOCATION
+  (setq tfile "Network Template 5_31_16.dwg") ;TEMPLATE FILE LOCATION
 
- (ninputs)          ;populating everything
+ (icninput)          ;populating everything
 
- (prelim)          ;Adding preliminary stamps
+ ;(prelim)          ;Adding preliminary stamps
  (command "ctab" "10"))
 
 

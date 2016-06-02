@@ -115,3 +115,55 @@
   (tab_sort)
   (princ)
 )
+
+
+(defun icninput()
+
+  (setq data (getexceldata (findfile file) (strcat "Network")))
+  (setq cnt (length data))
+
+  ;if layout doesnt exist add it
+  (if (member "10" (layoutlist))
+    (setq pname "10")
+    (addlayout "ProCurve" 10 "00"))
+
+
+  (setq i 2)
+  (setq pgcnt 0)
+  (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "NETWORK_DETAIL"))))
+  ;go through rows
+  (while (< i cnt)
+    (setq k 0)
+    (repeat (sslength ss)
+      (setq blockRef (vlax-ename->vla-object (ssname ss k)))
+      (setq index (getattributevalue blockRef "ITEM"))
+      ;find the block with the right index and set all values
+      ;(setq blcnum (formatnum (- i 1)))
+      (if (= index (formatnum (- (- i 1) (* pgcnt 26))))
+       (progn
+	      (setattributevalue blockRef "NAME1" (getdata data i 0))
+	      (setattributevalue blockRef "LOCATION" (getdata data i 1))
+	      (setattributevalue blockRef "MODULE_NAME" (getdata data i 2))
+	      (setattributevalue blockRef "REFDWG" (getdata data i 3))
+	      (setattributevalue blockRef "IPADDRESS" (getdata data i 4))
+      )
+    )
+
+
+      (setq k (+ k 1)))
+
+    (setq i (+ i 1))
+    (if (and (> (- i 1) (* (+ 1 pgcnt) 26))(< i cnt))
+      (progn
+       (setq pgcnt (+ pgcnt 1))
+       (if (member (rtos (+ 10 pgcnt) 2 0) (layoutlist))
+         (setq pname (rtos (+ 10 pgcnt) 2 0))
+         (progn
+           (setq slotnum (formatnum (+ 10 pgcnt)))
+           (addlayout "ProCurve" (+ 10 pgcnt) "00"))
+         )
+       (setq ss (ssget "X" (list (cons 410 pname) (cons 2 "NETWORK_DETAIL"))))
+       )
+    )
+  )
+)
