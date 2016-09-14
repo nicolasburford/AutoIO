@@ -337,7 +337,14 @@
         (setattributevalue blockRef "DRAFTER" draftag)
         (setattributevalue blockRef "DATE" (today))
         ;(setattributevalue blockRefs "DATE/TIME" (today))
-        ))
+        )
+        (progn
+          (setq ss (ssget "X" (list (cons 2 "BorderArchD")(cons 410 pname))))
+          (setq blockRef (vlax-ename->vla-object (ssname ss 0)))
+          (setattributevalue blockRef "PG" (rtos num 2 0))
+          (setattributevalue blockRef "DATE" (today))
+        )
+    )
 
 
      (setq obj (ssget "X" (list (cons 410 pname)))) ;everything in layout

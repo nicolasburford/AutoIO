@@ -125,7 +125,7 @@
   ;if layout doesnt exist add it
   (if (member "10" (layoutlist))
     (setq pname "10")
-    (addlayout "ProCurve" 10 "00"))
+    (addlayout "ProCurve" 10 "1"))
 
 
   (setq i 2)
@@ -142,15 +142,15 @@
       ;(setq blcnum (formatnum (- i 1)))
       (if (= index (formatnum (- (- i 1) (* pgcnt 26))))
        (progn
-	      (setattributevalue blockRef "NAME1" (getdata data i 0))
-	      (setattributevalue blockRef "LOCATION" (getdata data i 1))
-	      (setattributevalue blockRef "MODULE_NAME" (getdata data i 2))
-	      (setattributevalue blockRef "REFDWG" (getdata data i 3))
-	      (setattributevalue blockRef "IPADDRESS" (getdata data i 4))
-        (if (findfile (strcat (getdata data i 5) "nb.dwg"))
+	      (setattributevalue blockRef "NAME1" (getdata data i 2))
+	      (setattributevalue blockRef "LOCATION" (getdata data i 3))
+	      (setattributevalue blockRef "MODULE_NAME" (getdata data i 4))
+	      (setattributevalue blockRef "REFDWG" (getdata data i 5))
+	      (setattributevalue blockRef "IPADDRESS" (getdata data i 6))
+        (if (findfile (strcat (getdata data i 7) "nb.dwg"))
           (progn
             (setq topt (cdr (assoc 10 (entget (ssname ss k)))))
-            (insblock (formatnum (+ 10 pgcnt)) topt (findfile (strcat (getdata data i 5) "nb.dwg")))
+            (insblock (formatnum (+ 10 pgcnt)) topt (findfile (strcat (getdata data i 7) "nb.dwg")))
           )
         )
       )
@@ -167,7 +167,7 @@
          (setq pname (rtos (+ 10 pgcnt) 2 0))
          (progn
            (setq slotnum (formatnum (+ 10 pgcnt)))
-           (addlayout "ProCurve" (+ 10 pgcnt) "00"))
+           (addlayout "ProCurve" (+ 10 pgcnt) (rtos (+ pgcnt 1) 2 0)))
          )
        (setq ss (ssget "X" (list (cons 410 pname) (cons 66 1))))
        )
