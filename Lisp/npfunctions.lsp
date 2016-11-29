@@ -56,7 +56,7 @@
  (defun newpinputs ()
 
   (setq cnum "1734")
-  (setq file "6174-255 Red Stag Rotorua IO List.xlsm")
+  ;(setq file "6174-255 Red Stag Rotorua IO List.xlsm")
   (setq data (getexceldata (findfile file) (strcat conso " IO")))
   (setq cnt (length data))
 
@@ -81,15 +81,15 @@
               (progn
                 (setq slotnum (formatnum (- k 1)))
                 ;Missing logic to decide when module already exists.
-                ;(addlayout slot (+ k 8) slotnum)
-                (if (setq ss (ssget "X" (list (cons 410 (rtos (+ k 8) 2 0))(cons 2 "MODNAME"))))
+                ;(addlayout slot (+ k 9) slotnum)
+                (if (setq ss (ssget "X" (list (cons 410 (rtos (+ k 9) 2 0))(cons 2 "MODNAME"))))
                   (progn
                     (if (= (getattributevalue (vlax-ename->vla-object (ssname ss 0)) "MODNAME") slot)
-                      (setq pname (rtos (+ k 8) 2 0))
-                      (addlayout slot (+ k 8) slotnum)
+                      (setq pname (rtos (+ k 9) 2 0))
+                      (addlayout slot (+ k 9) slotnum)
                     )
                   )
-                  (addlayout slot (+ k 8) slotnum)
+                  (addlayout slot (+ k 9) slotnum)
                 )
                 (setq iocnt 0)
                 (inputsh)

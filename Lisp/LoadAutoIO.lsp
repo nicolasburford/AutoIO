@@ -27,6 +27,8 @@
 (load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\references.lsp")
 (princ "references loaded successfully.\n")
 (load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\interconnect.lsp")
+(princ "New Point loaded successfully.\n")
+(load "C:\\Drafting\\Custom\\AutoIO\\Lisp\\npfunctions.lsp")
 (princ "interconnect loaded successfully.\n")
 (command "netload" "C:\\Drafting\\Custom\\AutoIO\\VB\\ACADEXCEL.dll")
 (princ "ACADEXCEL loaded successfully.\n")
