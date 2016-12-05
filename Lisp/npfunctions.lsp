@@ -44,9 +44,9 @@
   )
   (insblock "09" topt (findfile "newpend.dwg"))
   (setq topt stpt)
-  (insblock "09" topt (findfile "newmp2bl.dwg"))
-  (vla-explode iblk)
-  (vla-delete iblk)
+  ;(insblock "09" topt (findfile "newmp2bl.dwg"))
+  ; (vla-explode iblk)
+  ; (vla-delete iblk)
 
 )
 
