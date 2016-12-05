@@ -20,7 +20,6 @@
     (if (/= i 1)
       (progn
 
-
        (if (findfile (strcat slot "nbl.dwg"))
          (progn
            (insblock "09" topt (findfile (strcat slot "nbl.dwg")))

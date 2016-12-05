@@ -19,23 +19,13 @@
 (defun c:autoioupdate ()
   (vl-load-com)
 
-  ;Delete folder and replace with latest folder on network
-  (delfolder "C:\\Drafting\\Custom\\AutoIO\\Lisp")
-  (setq  flag
-   (LM:Copy
-     "\\\\usnr.com\\data\\Eng\\Electrical\\New Electrical Design\\Electrical\\AutoIO Tools\\Source Code\\Lisp"
-     "C:\\Drafting\\Custom\\AutoIO"))
+  (command "shell" "wscript \"C:\Drafting\Custom\AutoIO\Update\update.vbs\"")
 
+)
 
-
+(defun update2()
   ;Update all search paths
   (updatepaths)
-
-  ;If files copied successfuly, run the latest load to load all new files
-  (if flag
-    (load "LoadAutoIO.lsp")
-    (princ "AutoIO Update Failed.\n"))
-
 
   ;loading custom toolbar
   (if (=(menugroup "AutoIOTools") "AutoIOTools")
@@ -44,12 +34,9 @@
       (command "._cuiload" "AutoIOTools"))
 
     (command "._cuiload" "AutoIOTools"))
-
-
-  ;additional commands
-  (setupautoio)
-  (princ))
-
+    (c:AutoIO)
+  (princ)
+)
 
 ;Open help file
 (defun c:autoiohelp ()
