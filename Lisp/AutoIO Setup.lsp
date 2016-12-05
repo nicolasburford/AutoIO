@@ -1,7 +1,7 @@
 ;Function to display version of tools.
 (defun c:AutoIO  ()
   (princ "\nAuto IO\n")
-  (princ "Version 5.02")
+  (princ "Version 5.03")
   (princ))
 
 ;Additional function to run commands necessary for new updates
@@ -19,11 +19,11 @@
 (defun c:autoioupdate ()
   (vl-load-com)
 
-  (command "shell" "wscript \"C:\Drafting\Custom\AutoIO\Update\update.vbs\"")
+  (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\update.vbs\"")
 
 )
 
-(defun update2()
+(defun c:LoadAutoIO()
   ;Update all search paths
   (updatepaths)
 
