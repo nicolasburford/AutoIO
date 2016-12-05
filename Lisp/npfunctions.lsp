@@ -1,7 +1,12 @@
 
 ;pplace - Builds the rack and text in sheet 9.
-(defun newpplace (slots)
+(defun getpslots ()
+  (setq data (getexceldata (findfile file) (strcat conso " RACK")))
+  (setq slots (sublst (nth 7 data) 1 (length (nth 7 data))))
+)
 
+(defun newpplace ()
+  (getpslots)
 ;Selecting sheet 9, autosnap off, initial point conditions
 
   (setvar 'osmode 0)
@@ -14,12 +19,6 @@
   (foreach slot  slots
     (if (/= i 1)
       (progn
-       (if (AND (= 0 (rem (+ i 2) 12)) (/= i 0))
-         (progn
-           (insblock "09" topt (findfile "1734-EP24DCnbl.dwg"))
-           (vla-explode iblk)
-           (vla-delete iblk)
-           (setq topt (list (+ 0.91 (nth 0 topt)) (nth 1 topt)))))
 
 
        (if (findfile (strcat slot "nbl.dwg"))

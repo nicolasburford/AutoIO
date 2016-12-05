@@ -181,7 +181,14 @@
      (strcat mo "/" day "/" yr))
      ;string 'em together
 
-
+(defun sublst ( lst idx len )
+    (cond
+        (   (null lst) nil)
+        (   (< 0  idx) (sublst (cdr lst) (1- idx) len))
+        (   (null len) lst)
+        (   (< 0  len) (cons (car lst) (sublst (cdr lst) idx (1- len))))
+    )
+)
 
 ;getdata is used to simplify data indexing
 (defun getdata (data row col)
