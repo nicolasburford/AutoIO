@@ -3,6 +3,7 @@
 (defun getpslots ()
   (setq data (getexceldata (findfile file) (strcat conso " RACK")))
   (setq slots (sublst (nth 7 data) 1 (length (nth 7 data))))
+  (setq mods (sublst (nth 6 data) 1 (length (nth 6 data))))
 )
 
 (defun newpplace ()
@@ -32,9 +33,9 @@
 
       ;writing correct module numbers and sheets on modules
        (setq obj (ssget "X" (list (cons 410 "09"))))
-       (setq modn (formatnum (- i 1)))
-       (srxTEXT "Substring" "X1" modn obj)
-       (setq shtn (rtos (+ i 8) 2 0))
+       (setq modn (atoi (nth i mods)))
+       (srxTEXT "Substring" "X1" (formatnum modn) obj)
+       (setq shtn (rtos (+ modn 10) 2 0))
        (srxTEXT "Substring" "X2" shtn obj)
        ;(setq w (getwidth (vla-object->vlax-ename iblk)))
        (setq topt (list (+ w (nth 0 topt)) (nth 1 topt)))
@@ -75,7 +76,7 @@
 
        (if (AND (> k 1)(/= slot "EMPTY"))
         (progn
-            (if (AND (/= (substr (getdata data (+ i 1) 0) 1 4) cnum)(/= (getdata data (+ i 1) 0) "")(/= (getdata data (+ i 1) 0) "EMPTY")(/= (getdata data (+ i 1) 0) "ControlLogix.0")(not (vl-string-search "Analog" (getdata data i 1)))) ;if it has inputs
+            (if (AND (/= (substr (getdata data (+ i 1) 0) 1 4) cnum)(/= (getdata data (+ i 1) 0) "")(/= (getdata data (+ i 1) 0) "EMPTY")(/= (getdata data (+ i 1) 0) "ControlLogix.0")) ;if it has inputs
               (progn
                 (setq slotnum (formatnum (- k 1)))
                 ;Missing logic to decide when module already exists.

@@ -300,13 +300,12 @@
 ;add a sheet from templates
 (defun addlayout (modname num slotnum)
 
-  (command "-layout" "template" tfile modname "") ;will continue even if slot not found
+ (command "-layout" "template" tfile modname "") ;will continue even if slot not found
 
  (setq modname (vl-list->string
                 (vl-remove
                   32
                  (vl-string->list modname))))
-
 
   ;error handling will let user know if module not found
  (if (member modname (layoutlist))
