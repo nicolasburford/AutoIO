@@ -22,6 +22,7 @@
   (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\update.vbs\"")
 
 )
+;//Test moving these to the cloud
 
 (defun c:AUTOIOPULL ()
   (vl-load-com)
