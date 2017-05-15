@@ -1,3 +1,3 @@
 # AutoIO
 
-Proprietary software developed for USNR.
+Software developed for USNR.
