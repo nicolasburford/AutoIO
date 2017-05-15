@@ -23,7 +23,14 @@
 
 )
 
-(defun c:LoadAutoIO()
+(defun c:AUTOIOPULL ()
+  (vl-load-com)
+
+  (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\pull.vbs\"")
+
+)
+
+(defun c:AutoIOLoad()
   ;Update all search paths
   (updatepaths)
 
@@ -43,8 +50,6 @@
   (startapp
     "explorer.exe"
     "\\\\usnr.com\\data\\Eng\\Electrical\\New Electrical Design\\Electrical\\AutoIO Tools\\AutoIO Help.docx"))
-
-
 
 ;Converts a string with delimiter to a list
 (defun LM:str->lst (str del / pos)
