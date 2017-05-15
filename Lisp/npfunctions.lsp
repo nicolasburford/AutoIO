@@ -100,13 +100,22 @@
     (setq i (+ 1 i)
     )
   )
+
+
+    (if (= (substr conso 3 1) "C")
+      (progn
+        (setq ss (ssget "X" (list (cons 2 "Fuse"))))
+        (setq i 0)
+        (repeat (sslength ss)
+         (vla-delete (vlax-ename->vla-object (ssname ss i)))
+         (setq i (+ i 1)))
+
+        (setq ss (ssget "X" (list (cons 2 "TBlock"))))
+        (setq i 0)
+        (repeat (sslength ss)
+         (vla-delete (vlax-ename->vla-object (ssname ss i)))
+         (setq i (+ i 1)))))
 )
-
-
-
-
-
-
 
 
 (defun powbl ()
