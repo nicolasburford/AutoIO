@@ -19,17 +19,17 @@
 (defun c:autoioupdate ()
   (vl-load-com)
 
-  (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\update.vbs\"")
+  (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Lisp\\update.vbs\"")
 
 )
 ;//Test moving these to the cloud
 
-(defun c:AUTOIOPULL ()
-  (vl-load-com)
-
-  (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\pull.vbs\"")
-
-)
+; (defun c:AUTOIOPULL ()
+;   (vl-load-com)
+;
+;   (command "shell" "wscript \"C:\\Drafting\\Custom\\AutoIO\\Update\\pull.vbs\"")
+;
+; )
 
 (defun c:AutoIOLoad()
   ;Update all search paths
