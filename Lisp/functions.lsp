@@ -37,7 +37,7 @@
 ;this function will change all of most occuring stamps
 (defun C:addstamp ()
   (selectstamp)
-  (setq topt '(31.75 6.5625))
+  (setq topt '(34 0))
   (if (= userclick T)
     (foreach layout (layoutlist)
       (setq i 0 pt nil)
