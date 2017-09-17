@@ -242,6 +242,11 @@
                     (setq subpoint (list (- (nth 0 point) 5.5625) (nth 1 point)(nth 2 point)))
                     (if (setq ss (ssget "X" (list (cons 410 pname)(cons 10 subpoint)(cons 2 "FUSE"))))
                       (vla-delete (vlax-ename->vla-object (ssname ss 0))))
+                      ;;New point has a slightly different fuse offset
+                      ;
+                    (setq subpoint (list (- (nth 0 point) 5.3125) (nth 1 point)(nth 2 point)))
+                    (if (setq ss (ssget "X" (list (cons 410 pname)(cons 10 subpoint)(cons 2 "Fuse"))))
+                      (vla-delete (vlax-ename->vla-object (ssname ss 0))))
 
                     (if (/= col "")
                       (progn
