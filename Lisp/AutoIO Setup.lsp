@@ -1,7 +1,7 @@
 ;Function to display version of tools.
 (defun c:AutoIO  ()
   (princ "\nAuto IO\n")
-  (princ "Version 5.12")
+  (princ "Version 5.13")
   (princ))
 
 ;Additional function to run commands necessary for new updates

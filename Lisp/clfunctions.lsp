@@ -248,6 +248,13 @@
                     (if (setq ss (ssget "X" (list (cons 410 pname)(cons 10 subpoint)(cons 2 "Fuse"))))
                       (vla-delete (vlax-ename->vla-object (ssname ss 0))))
 
+                    (setq subpoint (list (- (nth 0 point) 4.28125) (nth 1 point)(nth 2 point)))
+                    (princ subpoint)
+                    (princ point)
+                    (princ pname)
+                      (if (setq ss (ssget "X" (list (cons 410 pname)(cons 10 subpoint)(cons 2 "Fuse08"))))
+                        (vla-delete (vlax-ename->vla-object (ssname ss 0))))
+
                     (if (/= col "")
                       (progn
                         (if (setq col2 (findfile (strcat col ".dwg")))
