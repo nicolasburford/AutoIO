@@ -58,7 +58,7 @@
         (insblock layout topt (strcat stamp ".dwg"))
         (insblock layout pt (strcat stamp ".dwg"))
       )
-      (setattributevalue iblk "DATE/TIME" (today))
+      (setattributevalue iblk "DATE/TIME" (todayLong))
     )
   )
 )
@@ -158,7 +158,25 @@
 
 
 
+(defun todayLong ( / d yr mo day)
+  (setq d (rtos (getvar "CDATE") 2 6)
+       ;get the date and time and convert to text
 
+            yr (substr d 3 2)
+  	  ;extract the year
+
+            mo (substr d 5 2)
+  	  ;extract the month
+
+           day (substr d 7 2)
+  	 ;extract the day
+
+       )
+   (setq mos '("January" "February" "March" "April" "May" "June" "July" "August"
+    "September" "October" "November" "December"))
+
+    (strcat (nth (atoi mo) mos) " " (itoa (atoi day)) ", 20" yr)
+)
 
 ;this function returns the current date
 (defun today ( / d yr mo day)
