@@ -175,7 +175,7 @@
    (setq mos '("January" "February" "March" "April" "May" "June" "July" "August"
     "September" "October" "November" "December"))
 
-    (strcat (nth (atoi mo) mos) " " (itoa (atoi day)) ", 20" yr)
+    (strcat (nth (- (atoi mo) 1) mos) " " (itoa (atoi day)) ", 20" yr)
 )
 
 ;this function returns the current date
