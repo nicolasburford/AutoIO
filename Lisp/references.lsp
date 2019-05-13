@@ -48,7 +48,7 @@
                (if (not (setq pref (getattributevalue (vlax-ename->vla-object (ssname ss2 k)) "PREREF")))
                 (setq pref ""))
 
-               (setq refstr2 (strcat pref "REF DWG " jobcons " SHEET " sheet ", LINE " (rtos line 2 0)))
+               (setq refstr2 (strcat pref "REF SHEET " sheet ", LINE " (rtos line 2 0)))
                (setattributevalue (vlax-ename->vla-object (ssname ss2 k)) "REF" refstr2)))
 
 
@@ -57,8 +57,8 @@
          (if (/= linestr "")
           (progn
             (if (vl-string-search "," linestr)
-              (setq refstr (strcat refstr "REF DWG " jobcons " SHEET " lay ", LINES " (ordernums linestr)))
-              (setq refstr (strcat refstr "REF DWG " jobcons " SHEET " lay ", LINE " (ordernums linestr))))
+              (setq refstr (strcat refstr "REF SHEET " lay ", LINES " (ordernums linestr)))
+              (setq refstr (strcat refstr "REF SHEET " lay ", LINE " (ordernums linestr))))
 
             (setattributevalue (vlax-ename->vla-object (ssname ss i)) "REF" refstr)
             (setq refstr (strcat refstr "\n")))))
